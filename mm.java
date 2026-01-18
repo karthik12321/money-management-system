@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class yash
+public class mm
 {
     public static void main(String[] args)
     {
@@ -174,37 +174,55 @@ class ReportGenerator
     }
 
     void generateDetailedReport()
-    {
-        int totalIncome = tm.getTotalIncome();
-        int totalExpense = tm.getTotalExpense();
-        int balance = totalIncome - totalExpense;
+{
+    int totalIncome = tm.getTotalIncome();
+    int totalExpense = tm.getTotalExpense();
+    int balance = totalIncome - totalExpense;
 
-        System.out.println("========== Detailed Financial Report ==========");
-        
-        System.out.println("\n  ------- Income Transactions -------");
-        Transaction[] incomes = tm.getIncomeTransactions();
-        if(incomes.length == 0) {
-            System.out.println("    No income recorded.");
-        } else {
-            for(Transaction t : incomes) {
-                System.out.println("    Type: " + t.type + " | Amount: " + t.amount);
-            }
+    System.out.println();
+    System.out.println("===============================================");
+    System.out.println("        DETAILED FINANCIAL REPORT");
+    System.out.println("===============================================");
+
+    // Income section
+    System.out.println("\nINCOME TRANSACTIONS");
+    System.out.println("-----------------------------------------------");
+
+    Transaction[] incomes = tm.getIncomeTransactions();
+    if (incomes.length == 0) {
+        System.out.println("No income recorded.");
+    } else {
+        for (int i = 0; i < incomes.length; i++) {
+            System.out.println(
+                (i + 1) + ". Type: " + incomes[i].type +
+                " | Amount: " + incomes[i].amount
+            );
         }
-
-        System.out.println("\n  ------- Expense Transactions -------");
-        Transaction[] expenses = tm.getExpenseTransactions();
-        if(expenses.length == 0) {
-            System.out.println("    No expenses recorded.");
-        } else {
-            for(Transaction t : expenses) {
-                System.out.println("    Type: " + t.type + " | Amount: " + t.amount);
-            }
-        }
-
-        System.out.println("\n  ------- Summary -------");
-        System.out.println("    Total Income   : " + totalIncome);
-        System.out.println("    Total Expense  : " + totalExpense);
-        System.out.println("    Final Balance  : " + balance);
-        System.out.println("===============================================\n");
     }
+
+    // Expense section
+    System.out.println("\nEXPENSE TRANSACTIONS");
+    System.out.println("-----------------------------------------------");
+
+    Transaction[] expenses = tm.getExpenseTransactions();
+    if (expenses.length == 0) {
+        System.out.println("No expenses recorded.");
+    } else {
+        for (int i = 0; i < expenses.length; i++) {
+            System.out.println(
+                (i + 1) + ". Type: " + expenses[i].type +
+                " | Amount: " + expenses[i].amount
+            );
+        }
+    }
+
+    // Summary section
+    System.out.println("\nSUMMARY");
+    System.out.println("-----------------------------------------------");
+    System.out.println("Total Income   : " + totalIncome);
+    System.out.println("Total Expense  : " + totalExpense);
+    System.out.println("-----------------------------------------------");
+    System.out.println("Final Balance  : " + balance);
+    System.out.println("===============================================\n");
+}
 }
