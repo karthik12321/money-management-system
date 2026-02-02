@@ -67,6 +67,10 @@ public class mm
                     System.exit(0);
                     break;
                 }
+                default:
+                {
+                    System.out.println("Invalid Choice\n");
+                }
             }
         }
     }
