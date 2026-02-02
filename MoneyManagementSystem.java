@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class mm
+public class MoneyManagementSystem
 {
     public static void main(String[] args)
     {
@@ -27,11 +27,8 @@ public class mm
             {
                 case 1:
                 {
-                    System.out.print("\nEnter income amount: ");
-                    int amt = sc.nextInt();
-                    sc.nextLine();
-                    System.out.print("Enter income type: ");
-                    String type = sc.nextLine();
+                    int amt = readValidAmount(sc);
+                    String type = chooseIncomeType(sc);
                     tm.addincome(amt, type);
                     System.out.println("Income added successfully!\n");
                     break;
@@ -39,11 +36,8 @@ public class mm
 
                 case 2:
                 {
-                    System.out.print("\nEnter expense amount: ");
-                    int amt = sc.nextInt();
-                    sc.nextLine();
-                    System.out.print("Enter expense type: ");
-                    String type = sc.nextLine();
+                    int amt = readValidAmount(sc);
+                    String type = chooseExpenseType(sc);
                     tm.addexpense(amt, type);
                     System.out.println("Expense added successfully!\n");
                     break;
@@ -74,6 +68,99 @@ public class mm
             }
         }
     }
+    static int readValidAmount(Scanner sc)
+{
+    while (true)
+    {
+        System.out.print("Enter amount: ");
+        String input = sc.nextLine();
+
+        if (input.length() == 0)
+        {
+            System.out.println("Amount cannot be empty.");
+            continue;
+        }
+
+        boolean valid = true;
+
+        // check every character is digit
+        for (int i = 0; i < input.length(); i++)
+        {
+            char c = input.charAt(i);
+
+            if (c < '0' || c > '9')
+            {
+                valid = false;
+                break;
+            }
+        }
+
+        if (!valid)
+        {
+            System.out.println("Invalid input. Only digits allowed.");
+            continue;
+        }
+
+        int value = Integer.parseInt(input);
+
+        if (value <= 0)
+        {
+            System.out.println("Amount must be greater than 0.");
+            continue;
+        }
+
+        return value;
+    }
+}
+static String chooseIncomeType(Scanner sc)
+{
+    while (true)
+    {
+        System.out.println("\nSelect income type:");
+        System.out.println("1. Salary");
+        System.out.println("2. Business/Freelance");
+        System.out.println("3. Investment");
+        System.out.println("4. Other");
+        System.out.print("Choice: ");
+
+        String input = sc.nextLine();
+
+        switch (input)
+        {
+            case "1": return "Salary";
+            case "2": return "Business/Freelance";
+            case "3": return "Investment";
+            case "4": return "Other";
+            default: System.out.println("Invalid choice. Try again.");
+        }
+    }
+}
+static String chooseExpenseType(Scanner sc)
+{
+    while (true)
+    {
+        System.out.println("\nSelect expense type:");
+        System.out.println("1. Food");
+        System.out.println("2. Housing");
+        System.out.println("3. Transport");
+        System.out.println("4. Personal");
+        System.out.println("5. Other");
+        System.out.print("Choice: ");
+
+        String input = sc.nextLine();
+
+        switch (input)
+        {
+            case "1": return "Food";
+            case "2": return "Housing";
+            case "3": return "Transport";
+            case "4": return "Personal";
+            case "5": return "Other";
+            default: System.out.println("Invalid choice. Try again.");
+        }
+    }
+}
+
 }
 
 class Transaction
